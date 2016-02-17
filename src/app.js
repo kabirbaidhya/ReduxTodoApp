@@ -1,52 +1,22 @@
 
-import {createStore} from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
 import App from './components/App.jsx';
+import Immutable from 'immutable';
+import {ActionType, TodoAction} from './actions/TodoAction.js';
+import todos from './reducers/todos.js';
 
+var store = createStore(todos);
 
-const Actions = {
-    INCREMENT: 'increment',
-    DECREMENT: 'decrement'
-};
-
-const Keys = {
-    UP: 38,
-    DOWN: 40
-};
-
-function counter(state = 0, action) {
-    switch (action.type) {
-        case Actions.INCREMENT:
-            return state + 1;
-
-        case Actions.DECREMENT:
-            return state -1;
-
-        default:
-            return state;
-    }
+function saveNewTodo(text) {
+    store.dispatch(TodoAction.add(text));
 }
-
-function handleIncrement() {
-    console.log('Incrementing');
-    store.dispatch({type: Actions.INCREMENT})
-}
-
-function handleDecrement() {
-    console.log('Decrementing');
-    store.dispatch({type: Actions.DECREMENT})
-}
-
-var store = createStore(counter);
 
 function render() {
+    console.log('current state', store.getState());
     ReactDOM.render(
-        <App
-            value={store.getState()}
-            onIncrement={handleIncrement}
-            onDecrement={handleDecrement}
-        />,
+        <App title="Todo App" todos={store.getState().get('todos')} handleSave={saveNewTodo} />,
         document.getElementById('app')
     );
 }
