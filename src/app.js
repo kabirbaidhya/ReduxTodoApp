@@ -17,9 +17,9 @@ store.subscribe(render);
 function render() {
     console.log(store.getState());
     const {todos, filter} = store.getState();
-    console.log('todos in the store', todos);
+
     ReactDOM.render(
-        <App todos={todos} filter={filter} store={store} />,
+        <App todos={todos} filter={filter} dispatch={store.dispatch} />,
         document.getElementById('app')
     );
 }
@@ -32,4 +32,3 @@ store.dispatch(addTodo('Task 4'));
 store.dispatch(setTodoCompleted(2, true));
 store.dispatch(setVisibility(filters.SHOW_COMPLETED));
 store.dispatch(setVisibility(filters.SHOW_ACTIVE));
-store.dispatch(setVisibility(filters.SHOW_ALL));

@@ -1,38 +1,21 @@
-import React from 'react';
-import {addTodo} from '../actions/actions.js';
-import TextInput from './TextInput.jsx';
 
-const KEY_RETURN = 13;
+import React from 'react';
+import List from './List.jsx';
+import Filter from './Filter.jsx';
+import TextBox from './TextBox.jsx';
 
 class App extends React.Component {
-    handleChange(e) {
-        var value = e.target.checked;
-    }
-
-    handleKeyUp(e) {
-        if (e.which === KEY_RETURN) {
-            e.preventDefault();
-
-            var text = e.target.value.trim();
-            if (text.length > 0 ) {
-                this.props.store.dispatch(addTodo(text));
-                e.target.value = '';
-            }
-        }
-    }
 
     render() {
-        const {todos, filter, store} = this.props;
-        console.log('todos received', todos);
+        const {todos, filter, dispatch} = this.props;
+
         return (
             <div>
                 <h1>Todo App</h1>
-                <input type="text" placeholder="What do you want to do?" onKeyUp={this.handleKeyUp.bind(this)}/>
-                <ul className="todo-list">
-                    {todos.map((item, index) =>
-                        <TextInput key={item.id} {...item} dispatch={store.dispatch}/>
-                    )}
-                </ul>
+
+                <TextBox dispatch={dispatch} />
+                <List todos={todos} dispatch={dispatch} />
+                <Filter filter={filter} dispatch={dispatch} />
             </div>
         );
     }

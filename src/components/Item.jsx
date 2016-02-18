@@ -2,8 +2,9 @@
 import React from 'react';
 import {setTodoCompleted} from '../actions/actions.js';
 
-class TextInput extends React.Component {
+class Item extends React.Component {
     handleChange(e) {
+        console.log('dispatching');
         this.props.dispatch(setTodoCompleted(this.props.id, e.target.checked));
     }
 
@@ -20,10 +21,10 @@ class TextInput extends React.Component {
     }
 }
 
-TextInput.propTypes = {
+Item.propTypes = {
     id: React.PropTypes.number.isRequired,
     text: React.PropTypes.string.isRequired,
     completed: React.PropTypes.bool.isRequired
 };
 
-export default TextInput;
+export default Item;
