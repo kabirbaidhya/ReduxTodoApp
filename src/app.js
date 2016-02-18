@@ -7,28 +7,14 @@ import { createStore } from 'redux';
 import reducer from './reducers';
 import filters from './constants/filters.js';
 import {addTodo, setTodoCompleted, setVisibility} from './actions/actions.js';
-
+import { Provider } from 'react-redux';
 var store = createStore(reducer);
 
-render();
-// Initial State
-store.subscribe(render);
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('app')
+);
 
-function render() {
-    console.log(store.getState());
-    const {todos, filter} = store.getState();
-
-    ReactDOM.render(
-        <App todos={todos} filter={filter} dispatch={store.dispatch} />,
-        document.getElementById('app')
-    );
-}
-
-// Just a test
-store.dispatch(addTodo('Task 1'));
-store.dispatch(addTodo('Task 2'));
-store.dispatch(addTodo('Task 3'));
-store.dispatch(addTodo('Task 4'));
-store.dispatch(setTodoCompleted(2, true));
-store.dispatch(setVisibility(filters.SHOW_COMPLETED));
-store.dispatch(setVisibility(filters.SHOW_ACTIVE));
+store.subscribe(() => console.log('[Log]', store.getState()));

@@ -1,10 +1,12 @@
 
 import React from 'react';
+import {connect} from 'react-redux';
+import Component from './base/Component';
 import {addTodo} from '../actions/actions.js';
 
 const KEY_RETURN = 13;
 
-class TextBox extends React.Component {
+class TextBox extends Component {
 
     handleKeyUp(e) {
         if (e.which === KEY_RETURN) {
@@ -12,7 +14,9 @@ class TextBox extends React.Component {
             var text = e.target.value.trim();
 
             if (text.length > 0 ) {
-                this.props.dispatch(addTodo(text));
+                const {dispatch} = this.props;
+
+                dispatch(addTodo(text));
                 e.target.value = '';
             }
         }
@@ -23,4 +27,4 @@ class TextBox extends React.Component {
     }
 }
 
-export default TextBox;
+export default connect()(TextBox);

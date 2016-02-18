@@ -1,15 +1,14 @@
 
 import React from 'react';
 import Item from './Item.jsx';
+import Component from './base/Component';
 
-class List extends React.Component {
+class List extends Component {
     render() {
-        const {todos, dispatch} = this.props;
-
         return (
             <ul className="todo-list">
-                {todos.map((item, index) =>
-                    <Item key={item.id} {...item} dispatch={dispatch}/>
+                {this.props.todos.map((item, index) =>
+                    <Item key={item.id} {...item} />
                 )}
             </ul>
         );

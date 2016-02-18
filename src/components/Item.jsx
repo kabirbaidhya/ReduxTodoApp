@@ -1,11 +1,14 @@
 
 import React from 'react';
+import {connect} from 'react-redux';
+import Component from './base/Component';
 import {setTodoCompleted} from '../actions/actions.js';
 
-class Item extends React.Component {
+class Item extends Component {
     handleChange(e) {
-        console.log('dispatching');
-        this.props.dispatch(setTodoCompleted(this.props.id, e.target.checked));
+        const {dispatch} = this.props;
+
+        dispatch(setTodoCompleted(this.props.id, e.target.checked));
     }
 
     render () {
@@ -27,4 +30,4 @@ Item.propTypes = {
     completed: React.PropTypes.bool.isRequired
 };
 
-export default Item;
+export default connect()(Item);

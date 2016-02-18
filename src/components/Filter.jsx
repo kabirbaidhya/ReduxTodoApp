@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import Component from './base/Component';
 import filters from '../constants/filters';
 import {setVisibility} from '../actions/actions';
 
-class Filter extends React.Component {
+class Filter extends Component {
 
     handleChange(e) {
         const {dispatch} = this.props;
@@ -37,4 +39,4 @@ class Filter extends React.Component {
     }
 }
 
-export default Filter;
+export default connect()(Filter);
