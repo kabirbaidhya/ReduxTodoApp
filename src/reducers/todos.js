@@ -5,7 +5,7 @@ function todos(state = [], action) {
         case actions.ADD_TODO:
 
             const item = {
-                id: state.length + 1,
+                id: action.data.id,
                 text: action.data.text,
                 completed: false
             };
@@ -15,16 +15,13 @@ function todos(state = [], action) {
                 item
             ];
 
-        case actions.COMPLETE_TODO:
-            const {index} = action.data;
+        case actions.SET_TODO_COMPLETED:
+            const {id, completed} = action.data;
 
-            return [
-                ...state.slice(0, index),
-                Object.assign({}, state[index], {
-                    completed: true
-                }),
-                ...state.slice(index + 1)
-            ];
+            return state.map(item => (
+                item.id === id ? Object.assign({}, item, {completed}) : item
+            ));
+
         default:
             return state;
     }

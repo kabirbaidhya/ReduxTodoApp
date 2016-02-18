@@ -1,16 +1,18 @@
 import actions from '../constants/actions.js';
 
+var autoId = 1;
+
 export function addTodo(text) {
     return {
         type: actions.ADD_TODO,
-        data: {text}
+        data: {id: autoId++, text}
     };
 }
 
-export function completeTodo(index) {
+export function setTodoCompleted(id, completed) {
     return {
-        type: actions.COMPLETE_TODO,
-        data: {index}
+        type: actions.SET_TODO_COMPLETED,
+        data: {id, completed}
     };
 }
 

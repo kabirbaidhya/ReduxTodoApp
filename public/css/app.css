@@ -1,0 +1,8 @@
+ul.todo-list li.completed:after {
+    content: 'completed';
+    font-size: 10px;
+    color: #999;
+    margin-left: 10px;
+    position: absolute;
+    line-height: 20px;
+}
