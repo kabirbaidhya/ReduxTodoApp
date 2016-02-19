@@ -7,6 +7,7 @@
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.2",
+    "serve": "^1.4.0",
     "webpack-stream": "^3.1.0"
   },
   "dependencies": {
@@ -14,5 +15,8 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1"
+  },
+  "scripts": {
+    "start": "gulp && gnome-open http://127.0.0.1:4321 && serve -p 4321 public/"
   }
 }
