@@ -1,2 +1,6 @@
 
-const action(type, data) => {type, data};
+function action(type, data = {}) {
+    return {type, data};
+}
+
+export {action};

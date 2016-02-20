@@ -1,65 +1,31 @@
 import Todo from '../services/Todo';
 import actions from '../constants/actions';
+import {action} from '../foundation/simple-action';
 
-var autoId = 1;
+let addTodo = (data) => action(actions.ADD_TODO, data);
 
-function addTodo(text) {
-    return {
-        type: actions.ADD_TODO,
-        data: {id: autoId++, text}
-    };
-}
+let showError = (message) => action(actions.SHOW_ERROR, {message});
 
-function showError(message) {
-    return {
-        type: actions.SHOW_ERROR,
-        data: {message}
-    };
-}
+let hideError = () => action(actions.HIDE_ERROR);
 
-function hideError() {
-    return {
-        type: actions.HIDE_ERROR,
-        data: {}
-    };
-}
+let freezeUI = () => action(actions.UI_FREEZE);
 
-export function freezeUI() {
-    return {
-        type: actions.UI_FREEZE,
-        data: {}
-    };
-}
+let unfreezeUI = () => action(actions.UI_UNFREEZE);
 
-export function unfreezeUI() {
-    return {
-        type: actions.UI_UNFREEZE,
-        data: {}
-    };
-}
+let setTodoCompleted = (id, completed) => action(actions.SET_TODO_COMPLETED, {id, completed});
 
-export function createTodo(text) {
+let setVisibility = (filter) => action(actions.SET_VISIBILITY, {filter});
+
+function createTodo(text) {
     return (dispatch) => {
         dispatch(freezeUI());
         dispatch(hideError());
 
         Todo.create(text).then(
-            (response) => dispatch(addTodo(response)),
+            (data) => dispatch(addTodo(data)),
             (error) => dispatch(showError(error))
         ).finally(() => dispatch(unfreezeUI()));
     };
 }
 
-export function setTodoCompleted(id, completed) {
-    return {
-        type: actions.SET_TODO_COMPLETED,
-        data: {id, completed}
-    };
-}
-
-export function setVisibility(filter) {
-    return {
-        type: actions.SET_VISIBILITY,
-        data: {filter}
-    };
-}
+export {freezeUI, unfreezeUI, createTodo, setTodoCompleted, setVisibility};
