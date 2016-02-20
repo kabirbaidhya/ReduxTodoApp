@@ -1,3 +1,12 @@
+
+ul.todo-list[data-filter=SHOW_ACTIVE] li.completed {
+    display: none;
+}
+
+ul.todo-list[data-filter=SHOW_COMPLETED] li.todo {
+    display: none;
+}
+
 ul.todo-list li.completed:after {
     content: 'completed';
     font-size: 10px;

@@ -23,12 +23,13 @@ class Filter extends Component {
     }
 
     render() {
+        const {filter, freezed} = this.props;
 
         return (
             <div className="filter">
                 <label>
                     Filter: {' '}
-                    <select value={this.props.filter} onChange={this.handleChange.bind(this)}>
+                    <select value={filter} onChange={this.handleChange.bind(this)} disabled={freezed}>
                         {this.getFilterList().map((item, index) =>
                             <option key={index} value={item.value}>{item.label}</option>
                         )}

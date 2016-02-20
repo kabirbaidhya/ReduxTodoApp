@@ -1,10 +1,15 @@
-import todos from './todos.js';
-import filter from './filter.js';
+import todos from './todos';
+import filter from './filter';
+import freeze from './freeze';
+import error from './error';
+
 import {combineReducers} from 'redux';
 
 var reducer = combineReducers({
     todos,
-    filter
+    filter,
+    error,
+    freezed: freeze,
 });
 
 export default reducer;

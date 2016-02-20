@@ -2,7 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Component from './base/Component';
-import {addTodo} from '../actions/actions.js';
+import {createTodo} from '../actions/actions.js';
 
 const KEY_RETURN = 13;
 
@@ -16,14 +16,19 @@ class TextBox extends Component {
             if (text.length > 0 ) {
                 const {dispatch} = this.props;
 
-                dispatch(addTodo(text));
+                dispatch(createTodo(text));
                 e.target.value = '';
             }
         }
     }
 
     render() {
-        return <input type="text" placeholder="What do you want to do?" onKeyUp={this.handleKeyUp.bind(this)}/>
+        return <input type="text"
+            placeholder="What do you want to do?"
+            onKeyUp={this.handleKeyUp.bind(this)}
+            disabled={this.props.freezed}
+            autoFocus
+        />
     }
 }
 

@@ -12,12 +12,12 @@ class Item extends Component {
     }
 
     render () {
-        const {text, completed} = this.props;
+        const {text, completed, freezed} = this.props;
 
         return (
-            <li className={completed ? 'completed' : ''}>
+            <li className={completed ? 'completed' : 'todo'}>
                 <label>
-                    <input type="checkbox" checked={completed} onChange={this.handleChange.bind(this)}/> {text}
+                    <input type="checkbox" checked={completed} onChange={this.handleChange.bind(this)} disabled={freezed} /> {text}
                 </label>
             </li>
         );
