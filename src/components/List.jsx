@@ -3,7 +3,6 @@ import React from 'react';
 import Item from './Item.jsx';
 
 function List ({todos, freezed, filter}) {
-    console.log('List render');
     if (todos.length > 0) {
         return (
             <ul className="todo-list" data-filter={filter}>

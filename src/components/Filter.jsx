@@ -9,7 +9,11 @@ class Filter extends Component {
     handleChange(e) {
         const {dispatch} = this.props;
 
-        dispatch(setVisibility(e.target.value));
+        let filter = e.target.value;
+        console.log(setVisibility);
+        console.log(setVisibility({filter}));
+
+        dispatch(setVisibility({filter}));
     }
 
     getFilterList() {

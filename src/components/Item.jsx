@@ -6,9 +6,10 @@ import {setTodoCompleted} from '../actions/actions.js';
 
 class Item extends Component {
     handleChange(e) {
-        const {dispatch} = this.props;
+        const {id, dispatch} = this.props;
+        var completed = e.target.checked;
 
-        dispatch(setTodoCompleted(this.props.id, e.target.checked));
+        dispatch(setTodoCompleted({id, completed}));
     }
 
     render () {
